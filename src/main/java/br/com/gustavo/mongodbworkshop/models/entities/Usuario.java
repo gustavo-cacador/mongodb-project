@@ -1,7 +1,11 @@
 package br.com.gustavo.mongodbworkshop.models.entities;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "usuarios")
 public class Usuario {
@@ -12,6 +16,8 @@ public class Usuario {
     private String nome;
     private String email;
 
+    @DBRef(lazy = true)
+    public List<Postagem> postagens = new ArrayList<>();
 
     private Usuario() {}
 
