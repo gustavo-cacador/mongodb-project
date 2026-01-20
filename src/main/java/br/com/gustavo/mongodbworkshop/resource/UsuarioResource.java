@@ -26,12 +26,6 @@ public class UsuarioResource {
         return ResponseEntity.ok().body(listaUsuario);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable String id) {
-//        UsuarioDTO usuarioDTO = usuarioService.findById(id);
-//        return ResponseEntity.ok().body(usuarioDTO);
-//    }
-
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable String id) {
         UsuarioDTO usuarioDTO = usuarioService.findById(id);
