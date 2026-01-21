@@ -24,9 +24,8 @@ public class UsuarioService {
         return listaUsuario.stream().map(UsuarioDTO::new).collect(Collectors.toList());
     }
 
-    public UsuarioDTO findById(String id) {
-        Optional<Usuario> result = usuarioRepository.findById(id);
-        Usuario usuario = result.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
+    public UsuarioDTO buscarPorId(String id) {
+        Usuario usuario = getUsuarioById(id);
         return new UsuarioDTO(usuario);
     }
 
@@ -35,6 +34,18 @@ public class UsuarioService {
         copyDTOToEntity(usuarioDTO, usuario);
         usuario = usuarioRepository.insert(usuario);
         return new UsuarioDTO(usuario);
+    }
+
+    public UsuarioDTO atualizar (String id, UsuarioDTO usuarioDTO) {
+        Usuario usuario = getUsuarioById(id);
+        copyDTOToEntity(usuarioDTO, usuario);
+        usuario = usuarioRepository.save(usuario);
+        return new UsuarioDTO(usuario);
+    }
+
+    private Usuario getUsuarioById(String id) {
+        Optional<Usuario> result = usuarioRepository.findById(id);
+        return result.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
     }
 
     private void copyDTOToEntity(UsuarioDTO usuarioDTO, Usuario usuario) {

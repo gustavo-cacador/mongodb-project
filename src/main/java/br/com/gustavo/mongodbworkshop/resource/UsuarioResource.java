@@ -27,7 +27,7 @@ public class UsuarioResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable String id) {
-        UsuarioDTO usuarioDTO = usuarioService.findById(id);
+        UsuarioDTO usuarioDTO = usuarioService.buscarPorId(id);
         return ResponseEntity.ok().body(usuarioDTO);
     }
 
@@ -40,5 +40,11 @@ public class UsuarioResource {
                 .buildAndExpand(usuarioDTO.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(usuarioDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> atualizar(@PathVariable String id, @RequestBody UsuarioDTO usuarioDTO) {
+        usuarioDTO = usuarioService.atualizar(id, usuarioDTO);
+        return ResponseEntity.ok().body(usuarioDTO);
     }
 }
