@@ -19,7 +19,7 @@ public class Usuario {
     @DBRef(lazy = true)
     public List<Postagem> postagens = new ArrayList<>();
 
-    private Usuario() {}
+    public Usuario() {}
 
     public Usuario(String id, String nome, String email) {
         this.id = id;

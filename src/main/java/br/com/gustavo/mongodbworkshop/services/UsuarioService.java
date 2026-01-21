@@ -29,4 +29,16 @@ public class UsuarioService {
         Usuario usuario = result.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
         return new UsuarioDTO(usuario);
     }
+
+    public UsuarioDTO inserir(UsuarioDTO usuarioDTO) {
+        Usuario usuario = new Usuario();
+        copyDTOToEntity(usuarioDTO, usuario);
+        usuario = usuarioRepository.insert(usuario);
+        return new UsuarioDTO(usuario);
+    }
+
+    private void copyDTOToEntity(UsuarioDTO usuarioDTO, Usuario usuario) {
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setEmail(usuarioDTO.getEmail());
+    }
 }
