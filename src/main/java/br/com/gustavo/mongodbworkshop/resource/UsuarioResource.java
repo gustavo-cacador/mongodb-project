@@ -47,4 +47,10 @@ public class UsuarioResource {
         usuarioDTO = usuarioService.atualizar(id, usuarioDTO);
         return ResponseEntity.ok().body(usuarioDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> deletar(@PathVariable String id) {
+        usuarioService.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -43,6 +43,11 @@ public class UsuarioService {
         return new UsuarioDTO(usuario);
     }
 
+    public void deletar(String id) {
+        getUsuarioById(id);
+        usuarioRepository.deleteById(id);
+    }
+
     private Usuario getUsuarioById(String id) {
         Optional<Usuario> result = usuarioRepository.findById(id);
         return result.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
