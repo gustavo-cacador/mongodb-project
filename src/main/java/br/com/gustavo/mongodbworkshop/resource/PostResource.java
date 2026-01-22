@@ -26,4 +26,10 @@ public class PostResource {
         PostagemDTO postagemDTO = postService.buscarPorId(id);
         return ResponseEntity.ok().body(postagemDTO);
     }
+
+    @GetMapping("/buscartitulo")
+    public ResponseEntity<List<PostagemDTO>> buscarPorTitulo(@RequestParam(value = "titulo", defaultValue = "") String titulo) {
+        List<PostagemDTO> posts = postService.buscarPorTitulo(titulo);
+        return ResponseEntity.ok().body(posts);
+    }
 }

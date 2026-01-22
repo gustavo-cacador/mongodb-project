@@ -31,4 +31,9 @@ public class PostService {
         Optional<Postagem> result = postagemRepository.findById(id);
         return result.orElseThrow(() -> new ResourceNotFoundException("Post não encontrado."));
     }
+
+    public List<PostagemDTO> buscarPorTitulo(String titulo) {
+        List<Postagem> listaPosts = postagemRepository.findByTituloContainingIgnoreCase(titulo);
+        return listaPosts.stream().map(PostagemDTO::new).collect(Collectors.toList());
+    }
 }
