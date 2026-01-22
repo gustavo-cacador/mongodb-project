@@ -1,6 +1,7 @@
 package br.com.gustavo.mongodbworkshop.services;
 
 import br.com.gustavo.mongodbworkshop.dao.UsuarioRepository;
+import br.com.gustavo.mongodbworkshop.models.dto.PostagemDTO;
 import br.com.gustavo.mongodbworkshop.models.dto.UsuarioDTO;
 import br.com.gustavo.mongodbworkshop.models.entities.Usuario;
 import br.com.gustavo.mongodbworkshop.services.exceptions.ResourceNotFoundException;
@@ -56,5 +57,11 @@ public class UsuarioService {
     private void copyDTOToEntity(UsuarioDTO usuarioDTO, Usuario usuario) {
         usuario.setNome(usuarioDTO.getNome());
         usuario.setEmail(usuarioDTO.getEmail());
+    }
+
+    // funcao para retornar os posts a partir de um usuario
+    public List<PostagemDTO> buscarUsuarioPostagem(String id) {
+        Usuario usuario = getUsuarioById(id);
+        return usuario.getPostagens().stream().map(PostagemDTO::new).collect(Collectors.toList());
     }
 }

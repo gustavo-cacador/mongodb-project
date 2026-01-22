@@ -1,5 +1,6 @@
 package br.com.gustavo.mongodbworkshop.resource;
 
+import br.com.gustavo.mongodbworkshop.models.dto.PostagemDTO;
 import br.com.gustavo.mongodbworkshop.models.dto.UsuarioDTO;
 import br.com.gustavo.mongodbworkshop.services.UsuarioService;
 import org.springframework.http.ResponseEntity;
@@ -52,5 +53,11 @@ public class UsuarioResource {
     public ResponseEntity<UsuarioDTO> deletar(@PathVariable String id) {
         usuarioService.deletar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<PostagemDTO>> buscarPostagemPorUsuario(@PathVariable String id) {
+        List<PostagemDTO> listaUsuario = usuarioService.buscarUsuarioPostagem(id);
+        return ResponseEntity.ok().body(listaUsuario);
     }
 }
