@@ -32,4 +32,14 @@ public class PostResource {
         List<PostagemDTO> posts = postService.buscarPorTitulo(titulo);
         return ResponseEntity.ok().body(posts);
     }
+
+    @GetMapping("/buscartudo")
+    public ResponseEntity<List<PostagemDTO>> buscarPorTudo(
+            @RequestParam(value = "titulo", defaultValue = "") String titulo,
+            @RequestParam(value = "start", defaultValue = "") String start,
+            @RequestParam(value = "end", defaultValue = "") String end
+            ) {
+        List<PostagemDTO> posts = postService.buscarPorTudo(titulo, start, end);
+        return ResponseEntity.ok().body(posts);
+    }
 }
